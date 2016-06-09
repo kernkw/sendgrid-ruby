@@ -9,9 +9,9 @@ module SendGrid
 
       attr_accessor :group_id, :groups_to_display
 
-      def initialize(group_id:, groups_to_display: nil)
+      def initialize(group_id:, **args)
         @group_id = group_id
-        @groups_to_display = groups_to_display
+        @groups_to_display = args[:groups_to_display]
       end
 
       def to_json

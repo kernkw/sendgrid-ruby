@@ -1,31 +1,20 @@
 module SendGrid
-  class Content
-    def initialize(type: nil, value: nil)
-      @type = type
-      @value = value
-    end
+  module Mail
+    class Content
 
-    def type=(type)
-      @type = type
-    end
+      attr_accessor :type, :value
 
-    def type
-      @type
-    end
+      def initialize(type:, value:)
+        @type = type
+        @value = value
+      end
 
-    def value=(value)
-      @value = value
-    end
-
-    def value
-      @value
-    end
-
-    def to_json(*)
-      {
-        'type' => self.type,
-        'value' => self.value
-      }.delete_if { |_, value| value.to_s.strip == '' }
+      def to_json
+        {
+          'type' => type,
+          'value' => value
+        }.delete_if { |_, value| value.nil? }
+      end
     end
   end
 end

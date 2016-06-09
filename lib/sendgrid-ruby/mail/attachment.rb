@@ -13,7 +13,7 @@ module SendGrid
         @content_id = args[:content_id]
       end
 
-      def to_json(*)
+      def to_json
         {
           'content' => content,
           'type' => type,

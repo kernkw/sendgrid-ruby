@@ -1,41 +1,22 @@
 module SendGrid
-  class Footer
-    def initialize(enable: nil, text: nil, html: nil)
-      @enable = enable
-      @text = text
-      @html = html
-    end
+  module Mail
+    class Footer
 
-    def enable=(enable)
-      @enable = enable
-    end
+      attr_accessor :enable, :text, :html
 
-    def enable
-      @enable
-    end
+      def initialize(enable:, **args)
+        @enable = enable
+        @text = args[:text]
+        @html = args[:html]
+      end
 
-    def text=(text)
-      @text = text
-    end
-
-    def text
-      @text
-    end
-
-    def html=(html)
-      @html = html
-    end
-
-    def html
-      @html
-    end
-
-    def to_json(*)
-      {
-        'enable' => self.enable,
-        'text' => self.text,
-        'html' => self.html
-      }.delete_if { |_, value| value.to_s.strip == '' }
+      def to_json
+        {
+          'enable' => enable,
+          'text' => text,
+          'html' => html
+        }.delete_if { |_, value| value.nil? }
+      end
     end
   end
 end

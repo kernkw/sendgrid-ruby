@@ -12,7 +12,7 @@ module SendGrid
         @name = args[:name]
       end
 
-      def to_json(*)
+      def to_json
         {
           'email' => email,
           'name' => name
