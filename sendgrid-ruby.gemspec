@@ -20,4 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'ruby_http_client', '~> 2.0'
   spec.add_development_dependency 'rake', '~> 0'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'faker'
 end

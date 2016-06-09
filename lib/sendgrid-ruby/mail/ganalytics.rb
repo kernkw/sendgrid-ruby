@@ -1,7 +1,3 @@
-# Build the request body for the v3/mail/send endpoint
-# Please see the examples/helpers/mail/example.rb for a demonstration of usage
-require 'json'
-
 module SendGrid
   class Ganalytics
     def initialize(enable: nil, utm_source: nil, utm_medium: nil, utm_term: nil, utm_content: nil, utm_campaign: nil, utm_name: nil)
@@ -73,15 +69,4 @@ module SendGrid
       }.delete_if { |_, value| value.to_s.strip == '' }
     end
   end
-
-
-
-
-
-
-
-
-
-
-
 end
