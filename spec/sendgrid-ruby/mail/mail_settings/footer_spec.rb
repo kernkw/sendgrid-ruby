@@ -1,21 +1,21 @@
 require 'spec_helper'
 
-describe SendGrid::Mail::Footer do
+describe SendGrid::Mail::MailSettings::Footer do
   let(:enable) { rand(1..100).even? }
   let(:text) { Faker::Lorem.paragraph }
   let(:html) { "<p> #{Faker::Lorem.paragraph} </p>" }
-  let(:footer) { SendGrid::Mail::Footer.new(enable: enable, text: text, html: html) }
+  let(:footer) { SendGrid::Mail::MailSettings::Footer.new(enable: enable, text: text, html: html) }
 
   describe '.new' do
     context 'required params included' do
       it 'initializes correctly' do
-        expect(footer).to be_a SendGrid::Mail::Footer
+        expect(footer).to be_a SendGrid::Mail::MailSettings::Footer
       end
     end
 
     context 'required params not included' do
       it 'raises argument error' do
-        expect{ SendGrid::Mail::Footer.new(text: text, html: html) }.to raise_error ArgumentError
+        expect{ SendGrid::Mail::MailSettings::Footer.new(text: text, html: html) }.to raise_error ArgumentError
       end
     end
   end

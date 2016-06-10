@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe SendGrid::Mail::SandBoxMode do
+describe SendGrid::Mail::MailSettings::SandBoxMode do
 
   let(:enable) { rand(1..10).even? }
-  let(:sandbox_mode) { SendGrid::Mail::SandBoxMode.new(enable: enable) }
+  let(:sandbox_mode) { SendGrid::Mail::MailSettings::SandBoxMode.new(enable: enable) }
 
   describe '.new' do
     it 'initializes correctly' do
-      expect(sandbox_mode).to be_a SendGrid::Mail::SandBoxMode
+      expect(sandbox_mode).to be_a SendGrid::Mail::MailSettings::SandBoxMode
     end
   end
 

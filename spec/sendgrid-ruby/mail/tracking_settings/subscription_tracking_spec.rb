@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe SendGrid::Mail::SubscriptionTracking do
+describe SendGrid::Mail::TrackingSettings::SubscriptionTracking do
   let(:enable) { rand(1..100).even? }
   let(:text) { Faker::Lorem.sentence }
   let(:html) { Faker::Lorem.sentence }
   let(:substitution_tag) { '[tag]' }
 
   let(:subscription_tracking) do
-    SendGrid::Mail::SubscriptionTracking.new(enable: enable, text: text, html: html, substitution_tag: substitution_tag )
+    SendGrid::Mail::TrackingSettings::SubscriptionTracking.new(enable: enable, text: text, html: html, substitution_tag: substitution_tag )
   end
 
   describe '.new' do
     it 'initializes correctly' do
-      expect(subscription_tracking).to be_a SendGrid::Mail::SubscriptionTracking
+      expect(subscription_tracking).to be_a SendGrid::Mail::TrackingSettings::SubscriptionTracking
     end
   end
 

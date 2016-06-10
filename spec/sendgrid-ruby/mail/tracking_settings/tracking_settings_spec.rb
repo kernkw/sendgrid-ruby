@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SendGrid::Mail::TrackingSettings do
+describe SendGrid::Mail::TrackingSettings::TrackingSettings do
   let(:mock_tracking_object) do
     double().tap do|double|
       allow(double).to receive(:to_json).and_return( {'key' => 'value'} )
@@ -12,11 +12,11 @@ describe SendGrid::Mail::TrackingSettings do
   let(:subscription_tracking) { mock_tracking_object }
   let(:ganalytics) { mock_tracking_object }
 
-  let(:tracking_settings) { SendGrid::Mail::TrackingSettings.new(click_tracking: click_tracking, open_tracking: open_tracking) }
+  let(:tracking_settings) { SendGrid::Mail::TrackingSettings::TrackingSettings.new(click_tracking: click_tracking, open_tracking: open_tracking) }
 
   describe '.new' do
     it 'initializes correctly' do
-      expect(tracking_settings).to be_a SendGrid::Mail::TrackingSettings
+      expect(tracking_settings).to be_a SendGrid::Mail::TrackingSettings::TrackingSettings
     end
   end
 

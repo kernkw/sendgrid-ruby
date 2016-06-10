@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe SendGrid::Mail::SpamCheck do
+describe SendGrid::Mail::MailSettings::SpamCheck do
   let(:enable) { rand(1..100).even? }
   let(:threshold) { rand(1..10) }
   let(:post_to_url) { Faker::Internet.url }
 
   let(:spam_check) do
-    SendGrid::Mail::SpamCheck.new(enable: enable, threshold: threshold, post_to_url: post_to_url)
+    SendGrid::Mail::MailSettings::SpamCheck.new(enable: enable, threshold: threshold, post_to_url: post_to_url)
   end
 
 
   describe '.new' do
     it 'initializes correctly' do
-      expect(spam_check).to be_a SendGrid::Mail::SpamCheck
+      expect(spam_check).to be_a SendGrid::Mail::MailSettings::SpamCheck
     end
   end
 

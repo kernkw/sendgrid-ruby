@@ -1,21 +1,21 @@
 require 'spec_helper'
 
-describe SendGrid::Mail::BccSettings do
+describe SendGrid::Mail::MailSettings::Bcc do
   let(:enable) { rand(1..1000).even? } # This may not be needed
   let(:email) { Faker::Internet.email }
   let(:name) { Faker::Name.name }
-  let(:bcc_settings) { SendGrid::Mail::BccSettings.new(email: email) }
+  let(:bcc_settings) { SendGrid::Mail::MailSettings::Bcc.new(email: email) }
 
   describe '.new' do
     context 'required params included' do
       it 'initializes correctly' do
-         expect(bcc_settings).to be_a SendGrid::Mail::BccSettings
+         expect(bcc_settings).to be_a SendGrid::Mail::MailSettings::Bcc
       end
     end
 
     context 'required params not included' do
       it 'raises argument error' do
-        expect{ SendGrid::Mail::BccSettings.new }.to raise_error ArgumentError
+        expect{ SendGrid::Mail::MailSettings::Bcc.new }.to raise_error ArgumentError
       end
     end
   end

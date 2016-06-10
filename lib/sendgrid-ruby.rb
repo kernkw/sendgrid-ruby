@@ -1,28 +1,39 @@
 # Quickly and easily access the SendGrid API.
 require 'ruby_http_client'
+
+# Mail
 require "sendgrid-ruby/mail/asm"
 require "sendgrid-ruby/mail/attachment"
-require "sendgrid-ruby/mail/bcc_settings"
-require "sendgrid-ruby/mail/bypass_list_management"
+
 require "sendgrid-ruby/mail/categories"
+
+# Tracking Settings
+require "sendgrid-ruby/mail/tracking_settings/tracking_settings"
 require "sendgrid-ruby/mail/tracking_settings/click_tracking"
+require "sendgrid-ruby/mail/tracking_settings/open_tracking"
+require "sendgrid-ruby/mail/tracking_settings/subscription_tracking"
+require "sendgrid-ruby/mail/tracking_settings/ganalytics"
+
+# Mail Settings
+require "sendgrid-ruby/mail/mail_settings/mail_settings"
+require "sendgrid-ruby/mail/mail_settings/bcc"
+require "sendgrid-ruby/mail/mail_settings/bypass_list_management"
+require "sendgrid-ruby/mail/mail_settings/footer"
+require "sendgrid-ruby/mail/mail_settings/sandbox_mode"
+require "sendgrid-ruby/mail/mail_settings/spam_check"
+
+
 require "sendgrid-ruby/mail/content"
 require "sendgrid-ruby/mail/custom_arg"
 # TODO do we need email class
 # require "sendgrid-ruby/mail/email"
-require "sendgrid-ruby/mail/footer"
-require "sendgrid-ruby/mail/tracking_settings/ganalytics"
 require "sendgrid-ruby/mail/header"
 # require "sendgrid-ruby/mail/mail"
-# require "sendgrid-ruby/mail/mail_settings"
-require "sendgrid-ruby/mail/tracking_settings/open_tracking"
+
+
 require "sendgrid-ruby/mail/personalization"
-require "sendgrid-ruby/mail/sandbox_mode"
 require "sendgrid-ruby/mail/section"
-require "sendgrid-ruby/mail/spam_check"
-require "sendgrid-ruby/mail/subscription_tracking"
 require "sendgrid-ruby/mail/substitution"
-require "sendgrid-ruby/mail/tracking_settings"
 
 # require "sendgrid-ruby/task"
 # require "sendgrid-ruby/account_settings"
