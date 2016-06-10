@@ -1,22 +1,18 @@
 module SendGrid
-  class Substitution
-    def initialize(key: nil, value: nil)
-      @substitution = {}
-      (key.nil? || value.nil?) ? @substitution = nil : @substitution[key] = value
-    end
+  module Mail
+    class Substitution
 
-    def substitution=(substitution)
-      @substitution = substitution
-    end
+      attr_reader :substitution
 
-    def substitution
-      @substitution
-    end
+      def initialize(key:, value:)
+        @substitution = Hash.new.tap { |hash| hash[key] = value }
+      end
 
-    def to_json(*)
-      {
-        'substitution' => self.substitution
-      }.delete_if { |_, value| value.to_s.strip == '' }
+      def to_json(*)
+        {
+          'substitution' => substitution
+        }.delete_if { |_, value| value.nil? }
+      end
     end
   end
 end

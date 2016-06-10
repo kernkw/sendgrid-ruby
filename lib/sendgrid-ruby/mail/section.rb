@@ -1,22 +1,18 @@
 module SendGrid
-  class Section
-    def initialize(key: nil, value: nil)
-      @section = {}
-      (key.nil? || value.nil?) ? @section = nil : @section[key] = value
-    end
+  module Mail
+    class Section
 
-    def section=(section)
-      @section = section
-    end
+      attr_reader :section
 
-    def section
-      @section
-    end
+      def initialize(key:, value:)
+        @section = Hash.new.tap { |hash| hash[key] = value }
+      end
 
-    def to_json(*)
-      {
-        'section' => self.section
-      }.delete_if { |_, value| value.to_s.strip == '' }
+      def to_json
+        {
+          'section' => section
+        }.delete_if { |_, value| value.nil? }
+      end
     end
   end
 end

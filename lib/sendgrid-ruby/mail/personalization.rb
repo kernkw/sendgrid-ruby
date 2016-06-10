@@ -1,100 +1,39 @@
 module SendGrid
-  class Personalization
-    def initilize
-      @tos = nil
-      @ccs = nil
-      @bccs = nil
-      @subject = nil
-      @headers = nil
-      @substitutions = nil
-      @custom_args = nil
-      @send_at = nil
-    end
+  module Mail
+    class Personalization
 
-    def to=(to)
-      @tos = @tos.nil? ? [] : @tos
-      @tos = @tos.push(to.to_json)
-    end
+      attr_accessor :tos, :ccs, :bccs, :subject, :headers, :substitution, :custom_args, :send_at
 
-    def tos
-      @tos
-    end
+      def initialize(tos:, **args)
+        @tos = to
+        @ccs = args[:cc]
+        @bccs = args[:bcc]
+        @subject = args[:subject]
+        @headers = args[:header]
+        @substitutions = args[:substitutions]
+        @custom_arg = args[:custom_arg]
+        @send_at = args[:send_at]
+      end
 
-    def cc=(cc)
-      @ccs = @ccs.nil? ? [] : @ccs
-      @ccs = @ccs.push(cc.to_json)
-    end
 
-    def ccs
-      @ccs
-    end
+      def to_json(*)
+        {
+          'to' => jsonify(to),
+          'cc' => jsonify(cc),
+          'bcc' => jsonify(bcc),
+          'subject' => subject,
+          'headers' => headers.inject({}) { |mem, header| mem.merge(header) },
+          'substitutions' => substitution,
+          'custom_args' => custom_arg,
+          'send_at' => send_at
+        }.delete_if { |_, value| value.nil? }
+      end
 
-    def bcc=(bcc)
-      @bccs = @bccs.nil? ? [] : @bccs
-      @bccs = @bccs.push(bcc.to_json)
-    end
+      private
 
-    def bccs
-      @bccs
-    end
-
-    def subject=(subject)
-      @subject = subject
-    end
-
-    def subject
-      @subject
-    end
-
-    def headers=(headers)
-      @headers = @headers.nil? ? {} : @headers
-      headers = headers.to_json
-      @headers = @headers.merge(headers['header'])
-    end
-
-    def headers
-      @headers
-    end
-
-    def substitutions=(substitutions)
-      @substitutions = @substitutions.nil? ? {} : @substitutions
-      substitutions = substitutions.to_json
-      @substitutions = @substitutions.merge(substitutions['substitution'])
-    end
-
-    def substitutions
-      @substitutions
-    end
-
-    def custom_args=(custom_args)
-      @custom_args = @custom_args.nil? ? {} : @custom_args
-      custom_args = custom_args.to_json
-      @custom_args = @custom_args.merge(custom_args['custom_arg'])
-    end
-
-    def custom_args
-      @custom_args
-    end
-
-    def send_at=(send_at)
-      @send_at = send_at
-    end
-
-    def send_at
-      @send_at
-    end
-
-    def to_json(*)
-      {
-        'to' => self.tos,
-        'cc' => self.ccs,
-        'bcc' => self.bccs,
-        'subject' => self.subject,
-        'headers' => self.headers,
-        'substitutions' => self.substitutions,
-        'custom_args' => self.custom_args,
-        'send_at' => self.send_at
-      }.delete_if { |_, value| value.to_s.strip == '' }
+      def jsonify(parts)
+        parts.map { |part| part.to_json }
+      end
     end
   end
 end
