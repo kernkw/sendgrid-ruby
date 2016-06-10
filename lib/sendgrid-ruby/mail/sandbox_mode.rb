@@ -1,22 +1,18 @@
 module SendGrid
-  class SandBoxMode
-    def initialize(enable: nil)
-      @enable = enable
-    end
+  module Mail
+    class SandBoxMode
 
-    def enable=(enable)
-      @enable = enable
-    end
+      attr_accessor :enable
 
-    def enable
-      @enable
-    end
+      def initialize(enable:)
+        @enable = enable
+      end
 
-    def to_json(*)
-      {
-        'enable' => self.enable
-      }.delete_if { |_, value| value.to_s.strip == '' }
+      def to_json(*)
+        {
+          'enable' => enable
+        }.delete_if { |_, value| value.nil? }
+      end
     end
   end
-
 end

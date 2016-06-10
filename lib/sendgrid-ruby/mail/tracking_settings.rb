@@ -1,52 +1,30 @@
 module SendGrid
-  class TrackingSettings
-    def initialize
-      @click_tracking = nil
-      @open_tracking = nil
-      @subscription_tracking = nil
-      @ganalytics = nil
-    end
+  module Mail
+    class TrackingSettings
 
-    def click_tracking=(click_tracking)
-      @click_tracking = click_tracking
-    end
+      attr_accessor :click_tracking, :open_tracking, :subscription_tracking, :ganalytics
 
-    def click_tracking
-      @click_tracking.nil? ? nil : @click_tracking.to_json
-    end
+      def initialize(**args)
+        @click_tracking = args[:click_tracking]
+        @open_tracking = args[:open_tracking]
+        @subscription_tracking = args[:subscription_tracking]
+        @ganalytics = args[:ganalytics]
+      end
 
-    def open_tracking=(open_tracking)
-      @open_tracking = open_tracking
-    end
+      def to_json
+        {
+          'click_tracking' => try_json(click_tracking),
+          'open_tracking' => try_json(open_tracking),
+          'subscription_tracking' => try_json(subscription_tracking),
+          'ganalytics' => try_json(ganalytics)
+        }.delete_if { |_, value| value.nil? }
+      end
 
-    def open_tracking
-      @open_tracking.nil? ? nil : @open_tracking.to_json
-    end
+      private
 
-    def subscription_tracking=(subscription_tracking)
-      @subscription_tracking = subscription_tracking
-    end
-
-    def subscription_tracking
-      @subscription_tracking.nil? ? nil : @subscription_tracking.to_json
-    end
-
-    def ganalytics=(ganalytics)
-      @ganalytics = ganalytics
-    end
-
-    def ganalytics
-      @ganalytics.nil? ? nil : @ganalytics.to_json
-    end
-
-    def to_json(*)
-      {
-        'click_tracking' => self.click_tracking,
-        'open_tracking' => self.open_tracking,
-        'subscription_tracking' => self.subscription_tracking,
-        'ganalytics' => self.ganalytics
-      }.delete_if { |_, value| value.to_s.strip == '' }
+      def try_json(tracking)
+        tracking.nil? ? nil : tracking.to_json
+      end
     end
   end
-
 end
