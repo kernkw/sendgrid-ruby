@@ -21,7 +21,7 @@ describe SendGrid::Mail::Header do
 
   describe 'to_json' do
     it 'should display as proper json' do
-      expect(header.to_json).to eq({ 'header' => { key => value } })
+      expect(header.to_json).to eq({ key => value })
     end
   end
 end

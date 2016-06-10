@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SendGrid::Mail::Ganalytics do
+describe SendGrid::Mail::TrackingSettings::Ganalytics do
   let(:enable) { rand(1..100).even? }
   let(:utm_source) { Faker::Lorem.word }
   let(:utm_medium) { Faker::Lorem.word }
@@ -8,7 +8,7 @@ describe SendGrid::Mail::Ganalytics do
   let(:utm_content) { Faker::Lorem.word }
   let(:utm_campaign) { Faker::Lorem.word }
 
-  let(:ganalytics) { SendGrid::Mail::Ganalytics.new(enable: enable,
+  let(:ganalytics) { SendGrid::Mail::TrackingSettings::Ganalytics.new(enable: enable,
                                                     utm_source: utm_source,
                                                     utm_medium: utm_medium,
                                                     utm_term: utm_term,
@@ -18,13 +18,13 @@ describe SendGrid::Mail::Ganalytics do
   describe '.new' do
     context 'required params included' do
       it 'initializes correctly' do
-        expect(ganalytics).to be_a SendGrid::Mail::Ganalytics
+        expect(ganalytics).to be_a SendGrid::Mail::TrackingSettings::Ganalytics
       end
     end
 
     context 'required params not included' do
       it 'raises argument error' do
-        expect{ SendGrid::Mail::Ganalytics.new(utm_source: utm_source,
+        expect{ SendGrid::Mail::TrackingSettings::Ganalytics.new(utm_source: utm_source,
                                                utm_medium: utm_medium,
                                                utm_term: utm_term,
                                                utm_content: utm_content,

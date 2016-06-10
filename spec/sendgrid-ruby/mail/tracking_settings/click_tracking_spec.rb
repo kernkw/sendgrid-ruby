@@ -1,20 +1,20 @@
 require 'spec_helper'
 
-describe SendGrid::Mail::ClickTracking do
+describe SendGrid::Mail::TrackingSettings::ClickTracking do
   let(:enable) { rand(1..100).even? }
   let(:enable_text) { rand(1..100).even? }
-  let(:click_tracking) { SendGrid::Mail::ClickTracking.new(enable: enable, enable_text: enable_text) }
+  let(:click_tracking) { SendGrid::Mail::TrackingSettings::ClickTracking.new(enable: enable, enable_text: enable_text) }
 
   describe '.new' do
     context 'required params included' do
       it 'initializes correctly' do
-        expect(click_tracking).to be_a SendGrid::Mail::ClickTracking
+        expect(click_tracking).to be_a SendGrid::Mail::TrackingSettings::ClickTracking
       end
     end
 
     context 'required params not included' do
       it 'raises argument error' do
-        expect{ SendGrid::Mail::ClickTracking.new }.to raise_error ArgumentError
+        expect{ SendGrid::Mail::TrackingSettings::ClickTracking.new }.to raise_error ArgumentError
       end
     end
   end
